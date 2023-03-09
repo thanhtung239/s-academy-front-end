@@ -1,0 +1,26 @@
+.login-container {
+    .form-container {
+        margin-top: 20vh;
+        display: flex;
+        justify-content: center;
+        
+        .login-card {
+            box-shadow: 0 0 10px lighten(#000, 60%);
+        }
+
+        .login-form {
+            width: 30vw;
+        }
+    }
+    
+    .ant-form-item-label {
+        display: flex !important;
+        justify-content: start !important;
+    }
+
+    .ant-form-item-explain-error {
+        text-align: start;
+    }
+}
+
+
