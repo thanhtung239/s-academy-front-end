@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import "./register.scss"
-import { Form, Input, Button, Card } from "antd";
+import { Form, Input, Button, Card, Alert } from "antd";
 import { USERNAME_REQUIRED, PASSWORD_REQUIRED } from "../../constants/messages";
+import { Link } from "react-router-dom";
 
 const Register = () => {
-    const onFinish = (values) => {
-        console.log('Success:', values);
+    const [success, setSuccess] = useState(false);
+    const [emailExist, setEmailExist] = useState(false);
+
+    const onFinish = async (values) => {
+        try {
+            await axios.post('http://localhost:8000/api/register/', values);
+            setSuccess(true)
+        } catch (error) {
+            console.log(error.response.data.email)
+            setSuccess(false)
+            setEmailExist(true)
+        }
     };
     
     const onFinishFailed = (errorInfo) => {
@@ -14,6 +26,31 @@ const Register = () => {
     return (
         <div className="register-container">
             <div className="form-container">
+                {
+                    success && <Alert
+                    className="register-success-alert"
+                    message="You have successfully registered a user!"
+                    type="success"
+                    showIcon
+                    closable
+                    action={
+                        <Button style={{marginLeft: 20}} size="small" type="primary">
+                          <Link to="/login">Login</Link>
+                        </Button>
+                    }
+                    onClose={() => setSuccess(false)}
+                    />
+                }
+                {
+                    emailExist && <Alert
+                    className="register-success-alert"
+                    message="Email already exists!"
+                    type="error"
+                    showIcon
+                    closable
+                    onClose={() => setEmailExist(false)}
+                    />
+                }
                 <Card className="register-card">
                     <div className="form-title">Register</div>
                     <Form
@@ -28,8 +65,18 @@ const Register = () => {
                         autoComplete="off"
                     >
                         <Form.Item
-                        label="Name"
-                        name="name"
+                        label="First name"
+                        name="first_name"
+                        rules={[{
+                            required: true,
+                            message: USERNAME_REQUIRED,
+                            },]}
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item
+                        label="Last name"
+                        name="last_name"
                         rules={[{
                             required: true,
                             message: USERNAME_REQUIRED,
@@ -58,7 +105,7 @@ const Register = () => {
                             <Input.Password id=""/>
                         </Form.Item>
                         <Form.Item
-                        label="Repeat Password"
+                        label="Repeat password"
                         name="repeat_password"
                         rules={[{
                             required: true,
@@ -67,19 +114,11 @@ const Register = () => {
                         >
                             <Input.Password id=""/>
                         </Form.Item>
-                        <Form.Item
-                        label="GEN ID"
-                        name="gen_id"
-                        rules={[{
-                            required: true,
-                            message: USERNAME_REQUIRED,
-                            },]}
-                        >
+                        <Form.Item label="GEN ID" name="gen_id">
                             <Input type="number" />
                         </Form.Item>
 
-                        <Form.Item
-                            wrapperCol={{
+                        <Form.Item wrapperCol={{
                                 offset: 8,
                                 span: 16,
                                 }}

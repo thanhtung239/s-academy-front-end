@@ -1,17 +1,35 @@
-import React from "react";
+import React, {useState} from "react";
+import axios from "axios";
 import "./login.scss"
 import { Form, Input, Checkbox, Button, Card } from "antd";
 import { USERNAME_REQUIRED, PASSWORD_REQUIRED } from "../../constants/messages";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-    const onFinish = (values) => {
-        console.log('Success:', values);
-    };
-    
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    };
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+     // Create the submit method.
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const user = {
+            email: email,
+            password: password
+        };
+
+        // Create the POST requuest
+        const {data} = await axios.post('http://localhost:8000/api/token/',
+                        user ,{headers: 
+                        {'Content-Type': 'application/json'}},
+                        { withCredentials: true });
+
+        // Initialize the access & refresh token in localstorage.      
+        localStorage.clear();
+        localStorage.setItem('access_token', data.access);
+        localStorage.setItem('refresh_token', data.refresh);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
+        window.location.href = '/'
+    }
+
     return (
         <div className="login-container">
             <div className="form-container">
@@ -23,8 +41,6 @@ const Login = () => {
                         wrapperCol={{span: 16,}}
                         style={{maxWidth: 600,}}
                         initialValues={{remember: true,}}
-                        onFinish={onFinish}
-                        onFinishFailed={onFinishFailed}
                         autoComplete="off"
                     >
                         <Form.Item
@@ -35,7 +51,7 @@ const Login = () => {
                             message: USERNAME_REQUIRED,
                             },]}
                         >
-                            <Input />
+                            <Input onChange={(e) => setEmail(e.target.value)} />
                         </Form.Item>
                         <Form.Item
                         label="Password"
@@ -45,7 +61,7 @@ const Login = () => {
                             message: PASSWORD_REQUIRED,
                             },]}
                         >
-                            <Input.Password id=""/>
+                            <Input.Password onChange={(e) => setPassword(e.target.value)} />
                         </Form.Item>
                         <Form.Item
                             name="remember"
@@ -70,7 +86,7 @@ const Login = () => {
                                 span: 16,
                                 }}
                         >
-                            <Button type="primary" htmlType="submit" className="justify-content-start">
+                            <Button type="primary" htmlType="submit" className="justify-content-start" onClick={handleSubmit}>
                                 Submit
                             </Button>
                         </Form.Item>

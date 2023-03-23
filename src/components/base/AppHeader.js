@@ -1,7 +1,8 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from "react";
+import axios from "axios";
 import { Avatar, Layout, Dropdown, MenuProps} from "antd";
 import { AppContext } from "../../contexts/App";
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "./base.css";
 
@@ -19,14 +20,25 @@ const AppHeader = () => {
             : <MenuFoldOutlined className="trigger-icon" onClick={toggleSidebar} />
     }
 
+    const handleLogout = () => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+    }
+
     const items: MenuProps['items'] = [
         {
-            label: <Link to="/profile">Profile</Link>,
+            label: <Link onClick={handleLogout} to="/profile">
+                       <UserOutlined />
+                       <span style={{marginLeft: 5}}>Profile</span>
+                   </Link>,
             key: '1',
             url: '/profile'
         },
         {
-            label: <Link to="/login">Logout</Link>,
+            label: <Link onClick={handleLogout} to="/login">
+                       <LogoutOutlined />
+                       <span style={{marginLeft: 5}}>Logout</span>
+                   </Link>,
             key: '2',
             url: '/login'
         },
@@ -44,7 +56,7 @@ const AppHeader = () => {
                     Hoàng Thanh Tùng
                 </div>
                 <Dropdown menu={{ items }}> 
-                    <Avatar size={44}></Avatar> 
+                    <Avatar size={44} icon={<UserOutlined />}></Avatar> 
                 </Dropdown>
             </div>
         </Header>

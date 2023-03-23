@@ -1,14 +1,16 @@
 import React, { useContext }from "react";
 import {
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
+    DesktopOutlined,
+    HomeOutlined,
+    LaptopOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { AppContext } from "../../contexts/App"; 
+import { Link } from "react-router-dom";
 import "./base.css";
 
 const { Sider } = Layout;
+const { SubMenu } = Menu;
 
 const AppSider = () => {
     const { collapsed } = useContext(AppContext);
@@ -16,28 +18,40 @@ const AppSider = () => {
     return (
         <Sider trigger={null} collapsible collapsed={collapsed}>
             <div className="logo" />
-            <Menu
-            theme="dark"
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            items={[
-                {
-                key: '1',
-                icon: <UserOutlined />,
-                label: 'nav 1',
-                },
-                {
-                key: '2',
-                icon: <VideoCameraOutlined />,
-                label: 'nav 2',
-                },
-                {
-                key: '3',
-                icon: <UploadOutlined />,
-                label: 'nav 3',
-                },
-            ]}
-            />
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+                <Menu.Item key="Home">
+                    <Link to="/">
+                        <HomeOutlined />
+                        <span>Home</span>
+                    </Link>
+                </Menu.Item>
+                <SubMenu key="Courses" title={
+                    <span>
+                        <DesktopOutlined />
+                        <span>Courses</span>
+                    </span>
+                }>
+                    <Menu.Item>
+                        <Link to="/courses">All Courses</Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                        <Link to="/courses">My Courses</Link>
+                    </Menu.Item>
+                </SubMenu>
+                <SubMenu key="Workspaces" title={
+                    <span>
+                        <LaptopOutlined />
+                        <span>Workspaces</span>
+                    </span>
+                }>
+                    <Menu.Item>
+                        <Link to="/workspaces">All Workspaces</Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                        <Link to="/workspaces">My Workspaces</Link>
+                    </Menu.Item>
+                </SubMenu>
+            </Menu>
         </Sider>
     );
 }
