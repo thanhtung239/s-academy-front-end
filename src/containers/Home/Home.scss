@@ -1,0 +1,52 @@
+.home-component {
+    background-color: #ffffff;
+
+    .background-home-container {
+        position: relative;
+
+        .greetings-and-button {
+            position: absolute;
+            top: 25px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .greetings {
+            font-size: 34px;
+            font-weight: 700;
+            color: #57647E;
+        }
+
+        .button {
+            width: 200px;
+            height: 45px;
+            background-color: #57647E;
+            color: #ffffff;
+            margin-top: 10px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .button:hover {
+            scale: 1.1;
+        }
+    }
+
+    .statistics-container {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .statistics-content {
+            width: 100%;
+            margin-bottom: 50px;
+            padding: 0 5vw;
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

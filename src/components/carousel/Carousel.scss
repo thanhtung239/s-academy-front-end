@@ -1,0 +1,33 @@
+.home-carousel {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-title {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .title-underline {
+        height: 5px;
+        background-color: #000000;
+        margin-bottom: 50px;
+        border-radius: 10px;
+    }
+
+    .slick-slider {
+        width: 100% !important;
+    }
+
+    .container {
+        width: 100% !important;
+        padding: 40px;
+        background: #419be0;
+    }
+      
+    .slick-slide img {
+        margin: auto;
+    }
+}
