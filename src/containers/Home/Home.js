@@ -3,32 +3,13 @@ import { Button, Col, Image, Row } from "antd";
 import HomeCarousel from "../../components/carousel/HomeCarousel";
 import { HomeComponentTitle } from "../../components/title/ComponentTitle";
 import { HomeStatistics } from "../../components/statistics/Statistic";
-import SchoolIcon from '@mui/icons-material/School';
-import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
-import DevicesTwoToneIcon from '@mui/icons-material/DevicesTwoTone';
 import HomeBackGroundTop from "../../assets/images/home_background_top.jpg";
 import { useNavigate } from "react-router-dom";
+import { statisticsData } from "../../constants/utils";
 import "./Home.scss"
 
 const Home = () => {
-    const navigate = useNavigate()
-    const statisticsData = [
-        {
-            title: 'Courses',
-            icon: <SchoolIcon />,
-            data: 1000
-        },
-        {
-            title: 'Users',
-            icon: <PeopleAltSharpIcon />,
-            data: 1234
-        },
-        {
-            title: 'Workspaces',
-            icon: <DevicesTwoToneIcon />,
-            data: 789
-        }
-    ]
+    const navigate = useNavigate();
 
     return (
         <div className="home-component">

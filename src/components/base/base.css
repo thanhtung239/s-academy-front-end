@@ -50,4 +50,19 @@
 .app-footer {
     height: 50px;
     background-color: #57647E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+.footer-content  {
+    position: relative;
+    display: flex;
+}
+
+.footer-icon {
+    position: absolute;
+    font-size: 20px !important;
+    bottom: 0;
 }

@@ -1,6 +1,6 @@
-body {
+body, .ant-layout, .ant-card, .ant-menu, .ant-dropdown-menu, .ant-input {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'ProximaSoftRegular', BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -10,4 +10,19 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@font-face {
+  font-family: 'ProximaSoftRegular';
+  src: url('./assets/fonts/ProximaSoft-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'ProximaSoftBlack';
+  src: url('./assets/fonts/ProximaSoft-Black.ttf');
+}
+
+@font-face {
+  font-family: 'ProximaSoftBold';
+  src: url('./assets/fonts/ProximaSoft-Bold.ttf');
 }

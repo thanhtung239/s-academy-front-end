@@ -6,7 +6,11 @@ const { Meta } = Card;
 const CourseCard = () => {
     return (
         <Card
-            style={{ width: 300 }}
+            style={{
+                width: 300,
+                padding: '0px 20px',
+                border: 0,
+            }}
             cover={
                 <img
                     alt="example"

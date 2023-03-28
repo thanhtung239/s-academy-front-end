@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './assets/fonts/ProximaSoft-Black.ttf';
+import './assets/fonts/ProximaSoft-Bold.ttf';
+import './assets/fonts/ProximaSoft-Light.ttf';
+import './assets/fonts/ProximaSoft-Regular.ttf';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
