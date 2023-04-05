@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
-import axios from "axios";
 import { Avatar, Layout, Dropdown, MenuProps} from "antd";
-import { AppContext } from "../../contexts/App";
+import { AppContext } from "../../contexts/AppContext";
 import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "./base.css";
@@ -9,7 +8,8 @@ import "./base.css";
 const { Header } = Layout;
 
 const AppHeader = () => {
-    const { collapsed, setCollapsed } = useContext(AppContext);
+    const { collapsed, setCollapsed, userData } = useContext(AppContext);
+    
 
     const toggleSidebar = () => {
         setCollapsed(!collapsed);
@@ -53,7 +53,7 @@ const AppHeader = () => {
                     marginRight: 10,
                     fontSize: 16,
                 }}>
-                    Hoàng Thanh Tùng
+                    {userData.first_name + " " + userData.last_name}
                 </div>
                 <Dropdown menu={{ items }}> 
                     <Avatar size={44} icon={<UserOutlined />}></Avatar> 

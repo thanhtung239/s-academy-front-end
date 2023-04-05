@@ -4,6 +4,8 @@ import "./login.scss"
 import { Form, Input, Checkbox, Button, Card } from "antd";
 import { USERNAME_REQUIRED, PASSWORD_REQUIRED } from "../../constants/messages";
 import { Link } from "react-router-dom";
+import { postAPI } from "../../api/config";
+import { LOGIN } from "../../constants/api";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -11,23 +13,21 @@ const Login = () => {
      // Create the submit method.
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const user = {
             email: email,
             password: password
         };
 
-        // Create the POST requuest
-        const {data} = await axios.post('http://localhost:8000/api/token/',
-                        user ,{headers: 
-                        {'Content-Type': 'application/json'}},
-                        { withCredentials: true });
+        const successFn = (data) => {
+            localStorage.clear();
+            localStorage.setItem('access_token', data.access);
+            localStorage.setItem('refresh_token', data.refresh);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
+            window.location.href = '/'
+        }
 
-        // Initialize the access & refresh token in localstorage.      
-        localStorage.clear();
-        localStorage.setItem('access_token', data.access);
-        localStorage.setItem('refresh_token', data.refresh);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
-        window.location.href = '/'
+        postAPI(LOGIN, user, successFn);  
     }
 
     return (

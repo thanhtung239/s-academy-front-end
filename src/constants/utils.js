@@ -1,6 +1,10 @@
 import SchoolIcon from '@mui/icons-material/School';
 import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
 import DevicesTwoToneIcon from '@mui/icons-material/DevicesTwoTone';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import Groups2Icon from '@mui/icons-material/Groups2';
+import SellIcon from '@mui/icons-material/Sell';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 export const statisticsData = [
     {
@@ -54,3 +58,31 @@ export const homeCarouselSettings = {
       }
     ]
 };
+
+export const detailCourseData = [
+  {
+    title: "Course",
+    icon: < SchoolIcon />,
+    data :  "Python"
+  },
+  {
+    title: "Lessons",
+    icon: <MenuBookIcon />,
+    data :  "25"
+  },
+  {
+    title: "Students",
+    icon: <Groups2Icon />,
+    data :  "50"
+  },
+  {
+    title: "Tags",
+    icon: <SellIcon />,
+    data :  "Coding"
+  },
+  {
+    title: "Price",
+    icon: <CreditCardIcon />,
+    data :  "Free"
+  }
+]

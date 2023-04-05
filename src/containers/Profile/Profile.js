@@ -1,14 +1,16 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Avatar, Card, Col, Row } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import EmailIcon from '@mui/icons-material/Email';
 import CakeIcon from '@mui/icons-material/Cake';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { AppContext } from "../../contexts/AppContext";
 import "./Profile.scss"
 import ProfileForm from "../../components/form/Profile/ProfileForm";
 
 const Profile = () => {
+    const { userData } = useContext(AppContext);
     return (
         <div className="profile-component">
             <Row >
@@ -34,24 +36,26 @@ const Profile = () => {
                                     marginBottom: 20,
                                     fontSize: 20,
                                 }}
-                                >Thanh Tung Hoang</div>
+                                >
+                                    {userData.first_name + " " + userData.last_name}
+                                </div>
                                 
                                 <div>
                                     <div className="more-information">
                                         <CakeIcon />
-                                        <div className="more-information-text">23/09/2000</div>
+                                        <div className="more-information-text">{userData.birthday}</div>
                                     </div>
                                     <div className="more-information">
                                         <LocationOnIcon />
-                                        <div className="more-information-text">Ha Noi city</div>
+                                        <div className="more-information-text">{userData.address}</div>
                                     </div>
                                     <div className="more-information">
                                         <PhoneIphoneIcon />
-                                        <div className="more-information-text">0986560999</div>
+                                        <div className="more-information-text">{userData.mobile_number}</div>
                                     </div>
                                     <div className="more-information">
                                         <EmailIcon />
-                                        <div className="more-information-text">tung.thanh.h@samsung.com</div>
+                                        <div className="more-information-text">{userData.email}</div>
                                     </div>
                                 </div>
                             </div> 

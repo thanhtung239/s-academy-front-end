@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Col, DatePicker, Form, Input, Row, Space } from "antd";
 import "./ProfileForm.scss"
+import { AppContext } from "../../../contexts/AppContext";
 
 const ProfileForm = () => {
     const { form } = Form.useForm();
+    const {userData} = useContext(AppContext);
 
     return (
         <Form
@@ -14,54 +16,65 @@ const ProfileForm = () => {
             <Row>
                 <Col flex={1} className="left-item">
                     <Form.Item
-                        name="name"
-                        label="Name"
+                        name="first_name"
+                        label="First name"
                         rules={[{ required: true }]}
                     >
-                        <Input size="large" />
+                        <Input size="large" defaultValue={() => userData.first_name } />
                     </Form.Item>
                 </Col>
                 <Col flex={1} className="right-item">
+                    <Form.Item
+                        name="last_name"
+                        label="Last name"
+                        rules={[{ required: true }]}
+                    >
+                        <Input size="large" defaultValue={userData.last_name} />
+                    </Form.Item>
+                </Col>
+            </Row>
+            <Row>
+                <Col flex={1} className="left-item">
                     <Form.Item
                         name="email"
                         label="Email"
                     >
                         <Input
                             size="large"
-                            defaultValue="tung.thanh.h@samsung.com"
+                            defaultValue={userData.email}
                             disabled={true}
                         />
                     </Form.Item>
                 </Col>
-            </Row>
-            <Row>
-                <Col flex={1} className="left-item">
+                <Col flex={1} className="right-item">
                     <Form.Item
                         name="company"
                         label="Company"
                     >
-                        <Input size="large" />
-                    </Form.Item>
-                </Col>
-                <Col flex={1} className="right-item">
-                    <Form.Item
-                        name="department"
-                        label="Department"
-                    >
-                        <Input size="large" />
+                        <Input size="large" defaultValue={userData.company} />
                     </Form.Item>
                 </Col>
             </Row>
             <Row>
                 <Col flex={1} className="left-item">
                     <Form.Item
-                        name="address"
-                        label="Address"
+                        name="department"
+                        label="Department"
                     >
-                        <Input size="large" />
+                        <Input size="large" defaultValue={userData.department}/>
                     </Form.Item>
                 </Col>
                 <Col flex={1} className="right-item">
+                    <Form.Item
+                        name="address"
+                        label="Address"
+                    >
+                        <Input size="large" defaultValue={userData.address} />
+                    </Form.Item>
+                </Col> 
+            </Row>
+            <Row>
+                <Col span={12} className="left-item">
                     <Form.Item
                         name="phone_number"
                         label="Mobile"
@@ -73,12 +86,11 @@ const ProfileForm = () => {
                                     e.preventDefault();
                                 }
                             }}
+                            defaultValue={userData.mobile_number}
                         />
                     </Form.Item>
                 </Col>
-            </Row>
-            <Row>
-                <Col flex={1} className="left-item">
+                <Col span={12} className="right-item">
                     <Form.Item
                         name="birthday"
                         label="Date of birth"
@@ -86,15 +98,17 @@ const ProfileForm = () => {
                         <DatePicker />
                     </Form.Item>
                 </Col>
-                <Col flex={1} className="right-item">
-                    <Form.Item
-                        name="description"
-                        label="Description"
-                    >
-                        <Input.TextArea rows={4}/>
-                    </Form.Item>
-                </Col>
             </Row>
+            <Row>
+                <Col flex={1}>
+                        <Form.Item
+                            name="description"
+                            label="Description"
+                        >
+                            <Input.TextArea rows={4}/>
+                        </Form.Item>
+                    </Col>
+                </Row>
             <Space className="button-space">
                 <Button type="primary" htmlType="submit">
                     Save

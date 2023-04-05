@@ -1,5 +1,5 @@
 .all-course-layout {
-    background-color: white;
+    background-color: #FFFFFF;
     margin-top: 20px;
     min-height: 1000px;
 
@@ -21,7 +21,25 @@
         margin-top: 20px;
 
         .content-top {
-            padding-left: 5vw;
+            padding-left: 5.7vw;
         }
+    }
+
+    .list-courses-container {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        padding: 0 80px;
+    }
+
+    .gutter-row {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        margin-top: 20px;
+    }
+
+    .all-courses-bottom {
+        margin-bottom: 50px;
+        display: flex;
+        justify-content: center;
     }
 }

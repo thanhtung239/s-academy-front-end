@@ -1,0 +1,38 @@
+.lesson-container {
+    height: 100vh;
+    .left-side-container {
+        height: 100%;
+        margin-top: 3px;
+        background: #57647E;
+
+        .menu {
+            min-height: 100%;
+            font-size: 18px;
+            background: #2c3a57;
+            color: #FFFFFF;
+        }
+    }
+
+    .right-side-container {
+        margin-top: 3px;
+
+        .video-container {
+            width: 100%;
+            height: fit-content;
+            background: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tabs-container {
+            margin-top: 10px;
+            height: fit-content;
+            border-top: 3px solid rgba(5, 5, 5, 0.06);
+        }
+
+        .ant-tabs-nav-wrap {
+            justify-content: center;
+        }
+    }
+}

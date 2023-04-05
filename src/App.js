@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from './routes/routes';
 
 function App() {
+    document.title = 'S Academy';
 return (
     <div className="App">
         <BrowserRouter>

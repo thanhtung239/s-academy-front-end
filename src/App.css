@@ -14,3 +14,7 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.ant-layout {
+  background: #FFFFFF;
+}
