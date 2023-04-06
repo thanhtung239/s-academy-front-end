@@ -6,7 +6,7 @@ export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
     const [userData, setUserData] = useState([]);
-    const [collapsed, setCollapsed] = useState(false);
+    const [collapsed, setCollapsed] = useState(true);
 
     useEffect(() => {
         const successFn = (data) => {

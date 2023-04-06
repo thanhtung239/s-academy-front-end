@@ -4,7 +4,7 @@ import { AudioOutlined } from '@ant-design/icons';
 import './AllCourses.scss'
 import { CourseCard } from "../../components/card/Card";
 import { getAPI } from "../../api/config";
-import { GET_LIST_COURSES } from "../../constants/api";
+import { GET_COURSES_LIST } from "../../constants/api";
 import { AppContext } from "../../contexts/AppContext";
 
 const { Search } = Input;
@@ -23,7 +23,7 @@ const AllCourses = () => {
             setCoursesData(data);
         }
     
-        getAPI(GET_LIST_COURSES, successFn);
+        getAPI(GET_COURSES_LIST, successFn);
     }, [])
     
     const listCourses = coursesData.map((course) => {

@@ -3,13 +3,16 @@ import axios from "axios";
 import "./login.scss"
 import { Form, Input, Checkbox, Button, Card } from "antd";
 import { USERNAME_REQUIRED, PASSWORD_REQUIRED } from "../../constants/messages";
-import { Link } from "react-router-dom";
+import { loginSuccessMessage } from "../../components/messages/messages";
+import { Link, useNavigate } from "react-router-dom";
 import { postAPI } from "../../api/config";
 import { LOGIN } from "../../constants/api";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+
      // Create the submit method.
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,13 +21,14 @@ const Login = () => {
             email: email,
             password: password
         };
-
+        
         const successFn = (data) => {
             localStorage.clear();
             localStorage.setItem('access_token', data.access);
             localStorage.setItem('refresh_token', data.refresh);
             axios.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
-            window.location.href = '/'
+            loginSuccessMessage();
+            navigate('/');
         }
 
         postAPI(LOGIN, user, successFn);  

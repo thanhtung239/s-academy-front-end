@@ -1,75 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, Menu, Tabs,  Empty } from "antd";
 import { Link, useParams } from "react-router-dom";
-import ReactPlayer from 'react-player';
+import ReactPlayer from 'react-player/file';
 import './Lesson.scss'
+import { getAPI } from "../../api/config";
+import { BASE_URL, GET_LESSONS_LIST } from "../../constants/api";
+import { lessonTabItems } from "../../constants/utils";
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
 const Lesson = () => {
     const paramsId = useParams();
-    const titleExamples = [
-        "Title Example",
-        "Title Example",
-        "Title Example",
-        "Title Example",
-        "Title Example",
-        "Title Example",
-        "Title Example",
-        "Title Example",
-        "Title Example",
+    const [lessonData, setLessonData] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const lessonCurrentData = lessonData[currentIndex];
 
-    ]
+    useEffect(() => {
+        const params = { course_id: paramsId.course_id };
 
-    const items: TabsProps['items'] = [
-        {
-          key: '1',
-          label: `Information`,
-          children: <Empty />,
-        },
-        {
-          key: '2',
-          label: `Discussion`,
-          children: <Empty />,
-        },
-        {
-          key: '3',
-          label: `Note`,
-          children: <Empty />,
-        },
-    ];
+        const successFn = (data) => {
+            setLessonData(data);
+        }
+
+        getAPI(GET_LESSONS_LIST, successFn, params)
+    }, [])
+    
+    const titleList = lessonData.map((item, index) => {
+        return (
+            <Menu.Item key={item.id} >
+                <Link onClick={() => setCurrentIndex(index)}>
+                    {item.title}
+                </Link>
+            </Menu.Item>
+        )
+    })
     
     return (
         <div className="lesson-container">
+            {console.log(lessonCurrentData)}
             <Row style={{height: '100%'}}>
                 <Col span={5}>
                     <div className="left-side-container">
                         <Menu className="menu" mode="inline" defaultSelectedKeys={['1']}>
-                            {
-                                titleExamples.map((item) => {
-                                    return (
-                                        <Menu.Item key={item.key}>
-                                            <Link>
-                                                {item}
-                                            </Link>
-                                        </Menu.Item>
-                                    )
-                                })
-                            }
+                            {titleList}
                         </Menu>
                     </div>
                 </Col>
                 <Col span={19}>
                     <div className="right-side-container">
                         <div className="video-container">
-                            <ReactPlayer
-                                url='<https://www.youtube.com/watch?v=8Ulhv_q85pY&t=>'
+                            {lessonCurrentData &&
+                                <ReactPlayer
+                                url={BASE_URL + '/' + lessonCurrentData.video_path}
+                                controls={true}
                                 width="889px"
                                 height="500px"
-                            />
+                                />
+                            }
                         </div>
                         <div className="tabs-container">
                             <Tabs
                                 defaultActiveKey="1"
-                                items={items}
+                                items={lessonTabItems}
                                 size="large"
                                 tabBarGutter={70}
                             />

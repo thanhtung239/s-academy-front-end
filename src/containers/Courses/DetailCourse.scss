@@ -27,6 +27,20 @@
             padding-bottom: 15px;
             border-bottom: 2px solid #b2b8be;
         }
+
+        .button {
+            font-size: 18px;
+            background: #57647E;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            border-radius: 20px;
+            border: 0;
+        }
+
+        .button:hover {
+            scale: 1.1;
+        }
     }
 
     .detail-course-right-side {
