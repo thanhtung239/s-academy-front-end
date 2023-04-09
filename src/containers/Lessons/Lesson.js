@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Menu, Tabs,  Empty } from "antd";
+import { Row, Col, Menu, Tabs } from "antd";
 import { Link, useParams } from "react-router-dom";
 import ReactPlayer from 'react-player/file';
 import './Lesson.scss'
 import { getAPI } from "../../api/config";
 import { BASE_URL, GET_LESSONS_LIST } from "../../constants/api";
 import { lessonTabItems } from "../../constants/utils";
-import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
 const Lesson = () => {
     const paramsId = useParams();
@@ -36,7 +35,6 @@ const Lesson = () => {
     
     return (
         <div className="lesson-container">
-            {console.log(lessonCurrentData)}
             <Row style={{height: '100%'}}>
                 <Col span={5}>
                     <div className="left-side-container">

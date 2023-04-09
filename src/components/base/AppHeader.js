@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
-import { Avatar, Layout, Dropdown, MenuProps} from "antd";
+import React, { useContext } from "react";
+import { Avatar, Layout, Dropdown} from "antd";
 import { AppContext } from "../../contexts/AppContext";
-import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined } from "@ant-design/icons";
 import "./base.css";
 import { items } from "../../constants/utils";
 
@@ -9,7 +9,6 @@ const { Header } = Layout;
 
 const AppHeader = () => {
     const { collapsed, setCollapsed, userData } = useContext(AppContext);
-    
 
     const toggleSidebar = () => {
         setCollapsed(!collapsed);

@@ -1,8 +1,13 @@
+import { Empty } from "antd";
 import React from "react";
 
 const AllWorkspaces = () => {
     return (
-        <div>All workspaces</div>
+        <div>
+            <Empty style={{
+                marginTop: 80
+            }}/>
+        </div>
     )
 }
 

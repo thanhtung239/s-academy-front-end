@@ -13,6 +13,8 @@ import PageNotFound from "../../containers/NotFound/PageNotFound";
 import AllWorkspaces from "../../containers/Workspaces/AllWorkspaces";
 import DetailCourse from "../../containers/Courses/DetailCourse";
 import Lesson from "../../containers/Lessons/Lesson";
+import CreateCourse from "../../containers/Create/Course/Course";
+import CreateLesson from "../../containers/Create/Lesson/Lesson";
 
 const AppBase = () => {
 
@@ -31,6 +33,8 @@ const AppBase = () => {
                                 <Route exact path="/courses/:course_id" element={<DetailCourse />}></Route>
                                 <Route exact path="/courses/:course_id/lessons/:lesson_id" element={<Lesson />}></Route>
                                 <Route exact path="/workspaces" element={<AllWorkspaces />}></Route>
+                                <Route exact path="/create/course" element={<CreateCourse />}></Route>
+                                <Route exact path="/create/lesson" element={<CreateLesson />}></Route>
                                 <Route path="/*" element={<PageNotFound />}></Route>
                             </Routes>
                         </div>

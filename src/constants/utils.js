@@ -65,31 +65,26 @@ export const homeCarouselSettings = {
 };
 
 export const detailCourseData = [
-{
-	title: "Course",
-	icon: < SchoolIcon />,
-	data :  "Python"
-},
-{
-	title: "Lessons",
-	icon: <MenuBookIcon />,
-	data :  "25"
-},
-{
-	title: "Students",
-	icon: <Groups2Icon />,
-	data :  "50"
-},
-{
-	title: "Tags",
-	icon: <SellIcon />,
-	data :  "Coding"
-},
-{
-	title: "Price",
-	icon: <CreditCardIcon />,
-	data :  "Free"
-}
+	{
+		title: "Course",
+		icon: < SchoolIcon />,
+	},
+	{
+		title: "Lessons",
+		icon: <MenuBookIcon />,
+	},
+	{
+		title: "Students",
+		icon: <Groups2Icon />,
+	},
+	{
+		title: "Tags",
+		icon: <SellIcon />,
+	},
+	{
+		title: "Price",
+		icon: <CreditCardIcon />,
+	}
 ]
 
 export const lessonTabItems = [
@@ -118,7 +113,7 @@ localStorage.removeItem('refresh_token');
 
 export const items = [
 {
-	label: <Link onClick={handleLogout} to="/profile">
+	label: <Link to="/profile">
 				<UserOutlined />
 				<span style={{marginLeft: 5}}>Profile</span>
 			</Link>,

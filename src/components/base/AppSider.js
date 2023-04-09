@@ -3,6 +3,7 @@ import {
     DesktopOutlined,
     HomeOutlined,
     LaptopOutlined,
+    FolderAddOutlined,
 } from '@ant-design/icons';
 import { Affix, Layout, Menu } from 'antd';
 import { AppContext } from "../../contexts/AppContext"; 
@@ -51,6 +52,19 @@ const AppSider = () => {
                             </Menu.Item>
                             <Menu.Item key="My Workspaces">
                                 <Link to="/workspaces">My Workspaces</Link>
+                            </Menu.Item>
+                        </SubMenu>
+                        <SubMenu key="Create" title={
+                            <span>
+                                <FolderAddOutlined />
+                                <span>Create</span>
+                            </span>
+                        }>
+                            <Menu.Item key="Course">
+                                <Link to="/create/course">Course</Link>
+                            </Menu.Item>
+                            <Menu.Item key="Lesson">
+                                <Link to="/create/lesson">Lesson</Link>
                             </Menu.Item>
                         </SubMenu>
                     </Menu>

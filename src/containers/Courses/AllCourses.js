@@ -6,6 +6,7 @@ import { CourseCard } from "../../components/card/Card";
 import { getAPI } from "../../api/config";
 import { GET_COURSES_LIST } from "../../constants/api";
 import { AppContext } from "../../contexts/AppContext";
+import { ALL_COURSES_WELCOME } from "../../constants/messages";
 
 const { Search } = Input;
 
@@ -13,24 +14,22 @@ const AllCourses = () => {
     const [ coursesData, setCoursesData ] = useState([]);
     const { userData } = useContext(AppContext);
 
-    const searchParams = {
-        keyword: '',
-        sortedBy: ''
-    }
+    const fetchCoursesList = (value) => {
+        const params = {}
+        if (value) {
+            params.search = value;
+        }
 
-    useEffect(() => {
         const successFn = (data) => {
             setCoursesData(data);
         }
     
-        getAPI(GET_COURSES_LIST, successFn);
+        getAPI(GET_COURSES_LIST, successFn, params);
+    }
+
+    useEffect(() => {
+        fetchCoursesList();
     }, [])
-    
-    const listCourses = coursesData.map((course) => {
-        return (
-            <Col className="gutter-row" span={6}><CourseCard data={course} /></Col>
-        )
-    });
     
     const suffix = (
         <AudioOutlined
@@ -41,12 +40,23 @@ const AllCourses = () => {
         />
     );
       
-    const onSearch = (value) => console.log(value);
+    const onSearch = (value) => {
+        fetchCoursesList(value)
+    };
+
+    const listCourses = coursesData.map((course) => {
+        return (
+            <Col key={course.id} className="gutter-row" span={6}><CourseCard data={course} /></Col>
+        )
+    });
 
     return (
         <div className="all-course-layout">
             <div className="all-course-header">
-                <div className="header-welcome-text">Hi, { userData.last_name }</div>
+                <div className="text-space">
+                    <div className="header-welcome-text">Hi, {userData.last_name}!</div>
+                    <div className="header-welcome-text">{ALL_COURSES_WELCOME}</div>
+                </div>
             </div>
             <div className="all-course-content">
                 <Space className="content-top">
@@ -65,7 +75,7 @@ const AllCourses = () => {
                 </div>
             </div>
             <div className="all-courses-bottom">
-                <Pagination current={1} defaultPageSize={20} total={500} />
+                <Pagination current={1} defaultPageSize={20} total={listCourses.length} />
             </div>
         </div>
     )

@@ -1,31 +1,72 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Col, Row, Button } from "antd";
 import { useLocation, useNavigate, useParams } from "react-router";
 import "./DetailCourse.scss"
 import { RowInfoCourseCard } from "../../components/common/Common";
 import { detailCourseData } from "../../constants/utils";
+import { getAPI } from "../../api/config";
+import { COURSE_USER, GET_DETAIL_COURSE } from "../../constants/api";
+import { AppContext } from "../../contexts/AppContext";
 
 
 const DetailCourse = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const params = useParams();
-    console.log(params)
+    const routeParams = useParams();
+    const { userData } = useContext(AppContext);
+    const currentUser = userData;
+    const [courseData, setCourseData] = useState({});
+    const [checkJoined, setCheckJoined] = useState(false);
+    
 
+    const checkJoinedTheCourse = () => {
+        console.log(userData)
+        
+        const params = {
+            'user_id': userData.id,
+            'course_id': routeParams.course_id
+        }
+
+        const successFn = (data) => {
+            console.log(data)
+        }
+
+        getAPI(COURSE_USER, successFn, params)
+    }
+
+    useEffect(() => {
+        const params = {'id': routeParams.course_id};
+        const successFn = (data) => {
+            setCourseData(data.shift())
+        }
+
+        
+
+        getAPI(GET_DETAIL_COURSE, successFn, params)
+        
+    }, [])
+
+    checkJoinedTheCourse()
+    
+    const LearningButton = () => {
+        return checkJoined ? <Button className="button" onClick={() => navigate(location.pathname + '/lessons/1')}>
+                                <div>Keep Learning</div>
+                            </Button>
+                           : <Button className="button" onClick={() => navigate(location.pathname + '/lessons/1')}>
+                            <div>Start Learning</div>
+                            </Button>
+    }
+    
     return (
         <div className="detail-course-container">
             <Row gutter={16}>
                 <Col span={17}>
                     <div className="detail-course-left-side">
                         <div className="detail-course-overview">
-                            <div className="title">Title</div>
-                            <div className="overview">
-                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                            </div>
+                            <div className="title">{courseData.name}</div>
+                            <div className="overview">{courseData.description}</div>
                             <div style={{display: 'flex', justifyContent: 'flex-end', paddingBottom: 10}}>
-                                <Button className="button" onClick={() => navigate(location.pathname + '/lessons/1')}>
-                                    <div>Start Learning</div>
-                                </Button>
+                                <LearningButton />
                             </div>
                         </div>
                         <div className="list-lesson-space"></div>
@@ -39,9 +80,9 @@ const DetailCourse = () => {
                             </div>
                             <div className="content">
                                 {
-                                    detailCourseData.map((item) => {
+                                    detailCourseData.map((item, index) => {
                                         return (
-                                            <RowInfoCourseCard title={item.title} icon={item.icon} data={item.data} />
+                                            <RowInfoCourseCard key={index} title={item.title} icon={item.icon} data={courseData} />
                                         )
                                     })
                                 }

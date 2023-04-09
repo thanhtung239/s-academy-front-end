@@ -3,18 +3,22 @@
     .left-side-container {
         height: 100%;
         margin-top: 3px;
-        background: #57647E;
+        padding: 10px 10px;
 
         .menu {
+            padding-top: 3px;
             min-height: 100%;
             font-size: 18px;
             background: #2c3a57;
             color: #FFFFFF;
+            border-radius: 15px;
         }
     }
 
     .right-side-container {
         margin-top: 3px;
+        padding: 10px 10px;
+        
 
         .video-container {
             width: 100%;
@@ -23,6 +27,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            border-radius: 15px;
         }
 
         .tabs-container {
